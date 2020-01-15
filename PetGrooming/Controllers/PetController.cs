@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using PetGrooming.Data;
 using PetGrooming.Models;
+using System.Diagnostics;
 
 namespace PetGrooming.Controllers
 {
@@ -35,7 +36,18 @@ namespace PetGrooming.Controllers
             }
             return View(pet);
         }
+        [HttpPost]
+        public ActionResult Add(string PetName, Double PetWeight)
+        {
+            Debug.WriteLine("Want to create a pet with name " + PetName + " and weight " + PetWeight.ToString()) ;
+            return View();
+        }
 
+
+        public ActionResult Add()
+        {
+            return View();
+        }
         
 
         protected override void Dispose(bool disposing)

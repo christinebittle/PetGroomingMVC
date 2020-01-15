@@ -129,11 +129,34 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PetController.cs" />
+    <Compile Include="Controllers\SpeciesController.cs" />
     <Compile Include="Data\PetGroomingContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001081920475_InitialCreate.cs" />
+    <Compile Include="Migrations\202001081920475_InitialCreate.designer.cs">
+      <DependentUpon>202001081920475_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001092232324_first.cs" />
+    <Compile Include="Migrations\202001092232324_first.designer.cs">
+      <DependentUpon>202001092232324_first.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001092315565_color.cs" />
+    <Compile Include="Migrations\202001092315565_color.designer.cs">
+      <DependentUpon>202001092315565_color.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001151608501_Core_Concepts.cs" />
+    <Compile Include="Migrations\202001151608501_Core_Concepts.designer.cs">
+      <DependentUpon>202001151608501_Core_Concepts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\GroomBooking.cs" />
+    <Compile Include="Models\Groomer.cs" />
+    <Compile Include="Models\GroomService.cs" />
+    <Compile Include="Models\Owner.cs" />
     <Compile Include="Models\Pet.cs" />
+    <Compile Include="Models\Species.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -174,9 +197,12 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Pet\Show.cshtml" />
     <Content Include="Views\Pet\List.cshtml" />
+    <Content Include="Views\Pet\Add.cshtml" />
+    <Content Include="Views\Pet\Update.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Species\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -190,6 +216,20 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202001081920475_InitialCreate.resx">
+      <DependentUpon>202001081920475_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001092232324_first.resx">
+      <DependentUpon>202001092232324_first.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001092315565_color.resx">
+      <DependentUpon>202001092315565_color.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001151608501_Core_Concepts.resx">
+      <DependentUpon>202001151608501_Core_Concepts.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
