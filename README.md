@@ -2,7 +2,7 @@
 
 ## Updating an existing repo steps
 - Delete the Contents of the App_Data Folder (If you modified the DB)
-- Run an SQL command (going to sql server > mssqllocaldb > run query)
+- Run an SQL command (going to sql server > mssqllocaldb > pet grooming context (right click) > run query)
 - run query "truncate table pets;"
 - Use git cmd to run git pull origin master
 - Tools > Nuget Package Manager > Package Manager Console
