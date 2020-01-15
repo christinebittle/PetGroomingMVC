@@ -8,7 +8,7 @@
 - Tools > Nuget Package Manager > Package Manager Console
 - run command "update-database"
 
-## Cloning a new REPO steps
+## Cloning a new repo steps
 - use git cmd to clone repository
 - create "App_Data" Folder
 - right click project "Build" -> 1 successful
