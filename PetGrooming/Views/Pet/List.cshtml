@@ -10,8 +10,8 @@
     foreach(var Pet in Model)
     {
         <div>
-            <span><a href="/Pet/Show/@Pet.PetID">@Pet.Name</a></span>
-            <span>@Pet.Species</span>
+            <span><a href="/Pet/Show/@Pet.PetID">@Pet.PetName</a></span>
+            <span>@Pet.Species.Name</span>
             <span>@Pet.Weight</span>
         </div>
     }
