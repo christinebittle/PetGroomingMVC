@@ -1,6 +1,7 @@
 # PetGroomingMVC
 
 ## Updating an existing repo steps
+- run git stash to avoid conflicts between remote and local repository
 - Use git cmd to run git pull origin master
 - Tools > Nuget Package Manager > Package Manager Console
 - run command "update-database"
