@@ -18,5 +18,12 @@ namespace PetGrooming.Models
                 - Cost
                 - Duration
          */
+         public int GroomServiceID { get; set; }
+        public string ServiceName { get; set; }
+        //Cost is established as Cents rather than dollars (i.e. 2000c = $20.00)
+        //currency is CANADIAN (cad)
+        public int ServiceCost { get; set; }
+        //Service duration established as minutes (i.e. 90min = 1hour30min)
+        public int ServiceDuration { get; set; }
     }
 }

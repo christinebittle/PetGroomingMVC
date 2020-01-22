@@ -24,5 +24,12 @@ namespace PetGrooming.Models
                 - A list of GroomServices
                 
         */
+        [Key]
+        public int GroomBookingID { get; set; }
+        public DateTime GroomBookingDate { get; set; }
+        //established as the price of the whole appointment (13% HST tax included)
+        //price is in cents i.e. (12664cents) = $126.64
+        //currency is CANADIAN (cad)
+        public int GroomBookingPrice { get; set; }
     }
 }

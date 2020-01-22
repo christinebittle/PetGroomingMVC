@@ -25,6 +25,7 @@ namespace PetGrooming.Models
         [Key]
         public int PetID { get; set; }
         public string PetName { get; set; }
+        //weight is in kilograms (kg)
         public double Weight { get; set; }
         public string Color { get; set; }
         public string Notes { get; set; }

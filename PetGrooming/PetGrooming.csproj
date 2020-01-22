@@ -150,6 +150,22 @@
     <Compile Include="Migrations\202001151608501_Core_Concepts.designer.cs">
       <DependentUpon>202001151608501_Core_Concepts.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001162233218_groomer.cs" />
+    <Compile Include="Migrations\202001162233218_groomer.designer.cs">
+      <DependentUpon>202001162233218_groomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001162236023_groomer_new.cs" />
+    <Compile Include="Migrations\202001162236023_groomer_new.designer.cs">
+      <DependentUpon>202001162236023_groomer_new.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001221646146_all_tables.cs" />
+    <Compile Include="Migrations\202001221646146_all_tables.designer.cs">
+      <DependentUpon>202001221646146_all_tables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001221857295_species.cs" />
+    <Compile Include="Migrations\202001221857295_species.designer.cs">
+      <DependentUpon>202001221857295_species.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\GroomBooking.cs" />
     <Compile Include="Models\Groomer.cs" />
@@ -203,6 +219,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Species\" />
+    <Folder Include="Wireframes_ERD\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -229,6 +246,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001151608501_Core_Concepts.resx">
       <DependentUpon>202001151608501_Core_Concepts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001162233218_groomer.resx">
+      <DependentUpon>202001162233218_groomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001162236023_groomer_new.resx">
+      <DependentUpon>202001162236023_groomer_new.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001221646146_all_tables.resx">
+      <DependentUpon>202001221646146_all_tables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001221857295_species.resx">
+      <DependentUpon>202001221857295_species.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
