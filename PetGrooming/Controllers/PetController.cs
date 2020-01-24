@@ -46,8 +46,9 @@ namespace PetGrooming.Controllers
         public ActionResult List()
         {
             //How could we modify this to include a search bar?
-            var pets = db.Pets.SqlQuery("Select * from Pets").ToList();
+            List<Pet> pets = db.Pets.SqlQuery("Select * from Pets").ToList();
             return View(pets);
+           
         }
 
         // GET: Pet/Details/5
@@ -97,7 +98,7 @@ namespace PetGrooming.Controllers
         }
 
 
-        public ActionResult Add()
+        public ActionResult New()
         {
             //STEP 1: PUSH DATA!
             //What data does the Add.cshtml page need to display the interface?
@@ -110,6 +111,25 @@ namespace PetGrooming.Controllers
 
             return View(species);
         }
+
+        public ActionResult Update(int id)
+        {
+            //need information about a particular pet
+            Pet selectedpet = db.Pets.SqlQuery("select * from pets where petid = @id", new SqlParameter("@id",id)).FirstOrDefault();
+
+            return View(selectedpet);
+        }
+
+        [HttpPost]
+        public ActionResult Update(string PetName, string PetColor, double PetWeight)
+        {
+
+            Debug.WriteLine("I am trying to edit a pet's name to "+PetName+" and change the weight to "+PetWeight.ToString());
+
+            //logic for updating the pet in the database goes here
+            return RedirectToAction("List");
+        }
+      
 
         //TODO:
         //Update

@@ -213,12 +213,14 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Pet\Show.cshtml" />
     <Content Include="Views\Pet\List.cshtml" />
-    <Content Include="Views\Pet\Add.cshtml" />
+    <Content Include="Views\Pet\New.cshtml" />
     <Content Include="Views\Pet\Update.cshtml" />
+    <Content Include="Views\Species\List.cshtml" />
+    <Content Include="Views\Species\Show.cshtml" />
+    <Content Include="Views\Species\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Species\" />
     <Folder Include="Wireframes_ERD\" />
   </ItemGroup>
   <ItemGroup>
