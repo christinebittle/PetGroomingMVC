@@ -29,5 +29,12 @@ namespace PetGrooming.Models
         public string OwnerWorkPhone { get; set; }
         public string OwnerHomePhone { get; set; }
 
+
+        //Representing the "Many" in (One Booking to many Owners)
+        public ICollection<GroomBooking> GroomBookings { get; set; }
+
+        //Representing the "Many" in (Many Owners to Many Pets)
+        public ICollection<Pet> Pets { get; set; }
+
     }
 }

@@ -32,10 +32,15 @@ namespace PetGrooming.Models
 
 
 
-        //Representing the Many in (One species to Many Pets)
-        
+        //Representing the Many in (One species to Many Pets)        
         public int SpeciesID { get; set; }
         [ForeignKey("SpeciesID")]
         public virtual Species Species { get; set; }
+
+        //Representing the "Many" in (One Booking to many Pets)
+        public ICollection<GroomBooking> GroomBookings { get; set; }
+        
+        //Representing the "Many" in (Many Owners to Many Pets)
+        public ICollection<Owner> Owners { get; set; }
     }
 }

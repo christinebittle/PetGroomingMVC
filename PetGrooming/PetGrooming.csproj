@@ -166,6 +166,22 @@
     <Compile Include="Migrations\202001221857295_species.designer.cs">
       <DependentUpon>202001221857295_species.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001292232440_Booking_1_Many.cs" />
+    <Compile Include="Migrations\202001292232440_Booking_1_Many.designer.cs">
+      <DependentUpon>202001292232440_Booking_1_Many.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001292239153_Booking_1_Many_Inverse.cs" />
+    <Compile Include="Migrations\202001292239153_Booking_1_Many_Inverse.designer.cs">
+      <DependentUpon>202001292239153_Booking_1_Many_Inverse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001292241577_pets_owners_MxM.cs" />
+    <Compile Include="Migrations\202001292241577_pets_owners_MxM.designer.cs">
+      <DependentUpon>202001292241577_pets_owners_MxM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001292247345_booking_services_MxM.cs" />
+    <Compile Include="Migrations\202001292247345_booking_services_MxM.designer.cs">
+      <DependentUpon>202001292247345_booking_services_MxM.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\GroomBooking.cs" />
     <Compile Include="Models\Groomer.cs" />
@@ -260,6 +276,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001221857295_species.resx">
       <DependentUpon>202001221857295_species.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001292232440_Booking_1_Many.resx">
+      <DependentUpon>202001292232440_Booking_1_Many.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001292239153_Booking_1_Many_Inverse.resx">
+      <DependentUpon>202001292239153_Booking_1_Many_Inverse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001292241577_pets_owners_MxM.resx">
+      <DependentUpon>202001292241577_pets_owners_MxM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001292247345_booking_services_MxM.resx">
+      <DependentUpon>202001292247345_booking_services_MxM.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

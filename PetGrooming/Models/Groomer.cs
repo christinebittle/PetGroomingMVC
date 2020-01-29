@@ -29,5 +29,8 @@ namespace PetGrooming.Models
 
             A booking must reference to a groomer
         */
+
+        //Representing the "Many" in (One Booking to many Groomers)
+        public ICollection<GroomBooking> GroomBookings { get; set; }
     }
 }
