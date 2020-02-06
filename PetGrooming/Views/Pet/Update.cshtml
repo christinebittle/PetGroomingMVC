@@ -1,4 +1,4 @@
-﻿@model PetGrooming.Models.Pet
+﻿@model PetGrooming.Models.ViewModels.UpdatePet
 
 
 @{
@@ -6,13 +6,32 @@
 }
 
 <h2>Update</h2>
-<form action="/Pet/Update/@Model.PetID" method="POST">
-    <span>Pet Name</span><input type="text" value="@Model.PetName" id="PetName" name="PetName"/><br />
-    <span>Pet Color</span><input type="text" value="@Model.Color" id="PetColor" name="PetColor"/><br />
-    <span>Pet Weight</span><input type="text" value="@Model.Weight" id="PetWeight" name="PetWeight"/><br />
-    <div>
-        <span>Pet Notes</span>
-        <textarea id="PetNotes" name="PetNotes">@Model.Notes</textarea>
+<div class="navbar">
+    <a href="/Pet/List">Back to List</a>
+</div>
+<form action="/Pet/Update/@Model.Pet.PetID" method="POST">
+    <div class="inpfield"><span>Pet Name: </span><input type="text" value="@Model.Pet.PetName" id="PetName" name="PetName" /> </div>
+    <div class="inpfield"><span>Pet Color: </span><input type="text" value="@Model.Pet.Color" id="PetColor" name="PetColor" /> </div>
+    <div class="inpfield"><span>Pet Weight: </span><input type="text" value="@Model.Pet.Weight" id="PetWeight" name="PetWeight" />kg </div>
+    <div class="inpfield">
+        <span>Pet Species: </span>
+        <select id="PetSpeciesID" name="SpeciesID">
+            @foreach (var species in Model.Species)
+            {
+                var selected = "";
+                if (Model.Pet.SpeciesID == species.SpeciesID)
+                {
+                    selected = "selected";
+                }
+                <option value="@species.SpeciesID" @selected>@species.Name</option>
+            }
+        </select>
     </div>
-    <input type="submit" value="update pet" />
+    
+    <div class="inpfield">
+        <span>Pet Notes</span>
+        <textarea id="PetNotes" name="PetNotes">@Model.Pet.Notes</textarea>
+    </div>
+    <div class="inpfield"><input type="submit" value="update pet" /></div>
+    
 </form>

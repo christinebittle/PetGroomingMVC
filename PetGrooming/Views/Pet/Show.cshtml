@@ -5,7 +5,27 @@
 }
 
 <h2>Show Pet</h2>
+<div class="navbar">
+    <a class="navlink" href="/Pet/List">Back to List</a>
+    <a class="navlink" href="/Pet/Update/@Model.PetID">Update</a>
+    <a class="navlink" href="/Pet/DeleteConfirm/@Model.PetID">Delete</a>
+</div>
+<div>
+    <div class="col2">
+        <div>Name : @Model.PetName</div>
+        <div>Weight : @(Model.Weight)kg</div>
+        <div>Species : @Model.Species.Name</div>
+        <div>
+            Notes :
+            <div class="notepad">
+                @Model.Notes
+            </div>
+        </div>
 
-<div>Name : @Model.PetName</div>
-<div>Weight : @Model.Weight</div>
-<div>Species : @Model.Species.Name</div>
+    </div>
+    <div class="col2last">
+        <div class="sectionheader">INFO ABOUT PET OWNERS HERE</div>
+        <div class="sectionheader">INFO ABOUT PET GROOMS HERE</div>
+    </div>     
+    <div style="clear:both;"></div>
+</div>

@@ -127,6 +127,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\GroomServiceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PetController.cs" />
     <Compile Include="Controllers\SpeciesController.cs" />
@@ -189,6 +190,7 @@
     <Compile Include="Models\Owner.cs" />
     <Compile Include="Models\Pet.cs" />
     <Compile Include="Models\Species.cs" />
+    <Compile Include="Models\ViewModels\UpdatePet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -234,6 +236,14 @@
     <Content Include="Views\Species\List.cshtml" />
     <Content Include="Views\Species\Show.cshtml" />
     <Content Include="Views\Species\Add.cshtml" />
+    <Content Include="Views\Species\Update.cshtml" />
+    <Content Include="Views\Pet\DeleteConfirm.cshtml" />
+    <Content Include="Views\Species\DeleteConfirm.cshtml" />
+    <Content Include="Views\GroomService\List.cshtml" />
+    <Content Include="Views\GroomService\Show.cshtml" />
+    <Content Include="Views\GroomService\Update.cshtml" />
+    <Content Include="Views\GroomService\New.cshtml" />
+    <Content Include="Views\GroomService\DeleteConfirm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

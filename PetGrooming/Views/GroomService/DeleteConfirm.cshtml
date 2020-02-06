@@ -1,0 +1,12 @@
+﻿@model PetGrooming.Models.GroomService
+@{
+    ViewBag.Title = "DeleteConfirm";
+}
+
+<h2>Are you sure you want to delete @Model.ServiceName?</h2>
+<div class="navbar">
+    <a href="/GroomService/Show/@Model.GroomServiceID">Cancel</a>
+</div>
+<form method="POST" action="/GroomService/Delete/@Model.GroomServiceID">
+    <div class="inpfield"><input type="submit" value="Confirm" /></div>
+</form>

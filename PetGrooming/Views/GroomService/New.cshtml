@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>New Service</h2>
+
+<div class="navbar">
+    <a class="navlink" href="/GroomService/List">Back to List</a>
+</div>
+<div>
+    <div class="col2">
+        <form method="post" action="/GroomService/Add">
+            <div class="inpfield"><span>Name:</span><input type="text" name="ServiceName" id="ServiceName" /></div>
+            <div class="inpfield"><span>Cost $:</span><input type="text" name="ServiceCost" id="ServiceCost"/></div>
+            <div class="inpfield"><span>Duration (mins):</span><input type="text" name="ServiceDuration" id="ServiceDuration" /></div>
+            <input type="submit" value="Add Service" />
+        </form>
+    </div>
+    <div class="col2last"></div>
+    <div style="clear:both;"></div>
+</div>

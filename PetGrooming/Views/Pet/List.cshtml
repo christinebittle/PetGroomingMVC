@@ -5,15 +5,20 @@
 }
 
 <h2>List of Pets</h2>
-
-@{ 
-    foreach(var Pet in Model)
-    {
-        <div>
-            <span><a href="/Pet/Show/@Pet.PetID">@Pet.PetName</a></span>
-            <span>@Pet.Species.Name</span>
-            <span>@Pet.Weight</span>
-            <span><a href="/Pet/Update/@Pet.PetID">Update</a></span>
-        </div>
+<div class="navbar">
+    <a class="navlink" href="/Pet/New">Add New</a>
+</div>
+<div class="tilecontainer">
+    @{
+        foreach (var Pet in Model)
+        {
+            <div class="listitem">
+                <div class="listcat"><a href="/Pet/Show/@Pet.PetID">@Pet.PetName</a></div>
+                <div class="listcat">Species : <span>@Pet.Species.Name</span></div>
+                <div class="listcat">Weight : <span>@(Pet.Weight)kg</span></div>
+                <span class="cta"><a href="/Pet/Update/@Pet.PetID">Update</a></span>
+            </div>
+        }
     }
-}
+    <div style="clear:both;"></div>
+</div>

@@ -6,11 +6,18 @@
 }
 
 <h2>List</h2>
-@{ 
-    foreach (var species in @Model) {
+<div class="navbar">
+    <a href="/Species/Add">Add New</a>
+</div>
+<div class="tilecontainer">
+    @{
+        foreach (var species in @Model)
+        {
 
-        <div>
-            @species.Name
-        </div>
+            <div class="listitem">
+                <a href="/Species/Show/@species.SpeciesID">@species.Name</a>
+                <a class="cta" href="/Species/Update/@species.SpeciesID">Update</a>
+            </div>
+        }
     }
-}
+</div>

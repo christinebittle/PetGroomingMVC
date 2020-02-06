@@ -1,0 +1,28 @@
+﻿@model PetGrooming.Models.GroomService
+
+@{
+    ViewBag.Title = "Update";
+}
+
+<h2>Update @Model.ServiceName</h2>
+@{
+    //convert to currency (string format)
+    //https://stackoverflow.com/questions/21464496/format-decimal-value-to-currency-with-2-decimal-places
+    //NOTE: there are alternative ways to convert using cultureinfo property (harder to configure).
+    string Cost = String.Format("{0:0.00}", ((decimal)Model.ServiceCost / 100));
+}
+<div class="navbar">
+    <a class="navlink" href="/GroomService/List">Back to List</a>
+</div>
+<div>
+    <div class="col2">
+        <form method="post" action="/GroomService/Update/@Model.GroomServiceID">
+            <div class="inpfield"><span>Name:</span><input type="text" name="ServiceName" id="ServiceName" value="@Model.ServiceName" /></div>
+            <div class="inpfield"><span>Cost $:</span><input type="text" name="ServiceCost" id="ServiceCost" value="@Cost" /></div>
+            <div class="inpfield"><span>Duration (mins):</span><input type="text" name="ServiceDuration" id="ServiceDuration" value="@Model.ServiceDuration" /></div>
+            <input type="submit" value="Update Service" />
+        </form>
+    </div>
+    <div class="col2last"></div>
+    <div style="clear:both;"></div>
+</div>

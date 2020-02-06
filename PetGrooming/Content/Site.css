@@ -22,3 +22,27 @@ select,
 textarea {
     max-width: 280px;
 }
+
+
+/* styling for the pet grooming project*/
+.listitem{background:#f3f3f3;padding: 10px; position:relative; width:30%; margin-right:5%; float:left; margin-bottom:30px;}
+.listitem:nth-child(3n){margin-right:0;}
+.listitem .cta{position:absolute; top:10px; right:10px;}
+.tilecontainer{overflow:hidden; padding-top:20px;}
+.navlink{margin-right: 30px;}
+.notepad{background:#dffe4d; padding:15px; max-width:500px; margin-top:15px;}
+.inpfield{ max-width:500px; display:block; padding: 10px 0;}
+.inpfield input[type="text"], .inpfield select, .inpfield textarea {
+    float: right;
+    width: 350px;
+    box-sizing:border-box;
+
+}
+.inpfield textarea, .inpfield input[type="text"] {
+    padding:2px 2px 2px 5px;
+}
+.inpfield input[type="submit"]{margin-top:40px;}
+.inpfield::after{clear:both;}
+.col2, .col2last{float:left; margin-right:2%; width:49%;}
+.col2last{margin-right:0;}
+.sectionheader{background:#f3f3f3; padding:10px 8px; margin-bottom:20px;}

@@ -1,0 +1,20 @@
+﻿@model List<PetGrooming.Models.GroomService>
+
+
+@{
+    ViewBag.Title = "List";
+}
+<h2>List of Services</h2>
+<div class="tilecontainer">
+    @foreach (var service in @Model)
+    {
+        //convert to currency (string format)
+        //https://stackoverflow.com/questions/21464496/format-decimal-value-to-currency-with-2-decimal-places
+        //NOTE: there are alternative ways to convert using cultureinfo property (harder to configure).
+        string Cost = String.Format("{0:C2}",((decimal)service.ServiceCost / 100));
+        <div class="listitem">
+            <div><a href="/GroomService/Show/@service.GroomServiceID">@service.ServiceName</a></div>
+            <div>Cost: @Cost</div>
+        </div>
+    }
+</div>

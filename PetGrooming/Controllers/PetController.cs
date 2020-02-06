@@ -10,6 +10,7 @@ using System.Web;
 using System.Web.Mvc;
 using PetGrooming.Data;
 using PetGrooming.Models;
+using PetGrooming.Models.ViewModels;
 using System.Diagnostics;
 
 namespace PetGrooming.Controllers
@@ -116,27 +117,60 @@ namespace PetGrooming.Controllers
         {
             //need information about a particular pet
             Pet selectedpet = db.Pets.SqlQuery("select * from pets where petid = @id", new SqlParameter("@id",id)).FirstOrDefault();
+            List<Species> Species = db.Species.SqlQuery("select * from species").ToList();
 
-            return View(selectedpet);
+            UpdatePet UpdatePetViewModel = new UpdatePet();
+            UpdatePetViewModel.Pet = selectedpet;
+            UpdatePetViewModel.Species = Species;
+
+            return View(UpdatePetViewModel);
         }
 
         [HttpPost]
-        public ActionResult Update(string PetName, string PetColor, double PetWeight)
+        public ActionResult Update(int id, string PetName, string PetColor, double PetWeight, string PetNotes, int SpeciesID)
         {
 
-            Debug.WriteLine("I am trying to edit a pet's name to "+PetName+" and change the weight to "+PetWeight.ToString());
+            //Debug.WriteLine("I am trying to edit a pet's name to "+PetName+" and change the weight to "+PetWeight.ToString());
+
+            string query = "update pets set PetName=@PetName, SpeciesID=@SpeciesID, Weight=@PetWeight, color=@color, Notes=@Notes where PetID=@id";
+            SqlParameter[] sqlparams = new SqlParameter[6];
+            sqlparams[0] = new SqlParameter("@PetName", PetName);
+            sqlparams[1] = new SqlParameter("@PetWeight", PetWeight);
+            sqlparams[2] = new SqlParameter("@color", PetColor);
+            sqlparams[3] = new SqlParameter("@SpeciesID", SpeciesID);
+            sqlparams[4] = new SqlParameter("@Notes", PetNotes);
+            sqlparams[5] = new SqlParameter("@id",id);
+
+            db.Database.ExecuteSqlCommand(query, sqlparams);
 
             //logic for updating the pet in the database goes here
             return RedirectToAction("List");
         }
       
+        public ActionResult DeleteConfirm(int id)
+        {
+            string query = "select * from pets where petid = @id";
+            SqlParameter param = new SqlParameter("@id",id);
+            Pet selectedpet = db.Pets.SqlQuery(query, param).FirstOrDefault();
+
+            return View(selectedpet);
+        }
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            string query = "delete from pets where petid = @id";
+            SqlParameter param = new SqlParameter("@id", id);
+            db.Database.ExecuteSqlCommand(query, param);
+
+            return RedirectToAction("List");
+        }
 
         //TODO:
         //Update
         //[HttpPost] Update
         //[HttpPost] Delete
         //(optional) Delete
-        
+
 
         protected override void Dispose(bool disposing)
         {
