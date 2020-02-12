@@ -1,0 +1,20 @@
+﻿@model List<PetGrooming.Models.Owner>
+
+
+@{
+    ViewBag.Title = "List";
+}
+<h2>List of Owners</h2>
+<div class="navbar">
+    <a class="navlink" href="/Owner/New">Add New</a>
+</div>
+<div class="tilecontainer">
+    @foreach (var owner in @Model)
+    {
+        <div class="listitem">
+            <div><a href="/Owner/Show/@owner.OwnerID">@owner.OwnerLname, @owner.OwnerFname</a></div>
+            <div>Home: @owner.OwnerHomePhone</div>
+            <div>Work: @owner.OwnerWorkPhone</div>
+        </div>
+    }
+</div>

@@ -1,0 +1,26 @@
+﻿@model PetGrooming.Models.Owner
+
+
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>New Owner</h2>
+
+<div class="navbar">
+    <a class="navlink" href="/Owner/List">Back to List</a>
+</div>
+<div>
+    <div class="col2">
+        <form method="post" action="/Owner/Update/@Model.OwnerID">
+            <div class="inpfield"><span>First Name:</span><input type="text" name="OwnerFname" id="OwnerFname" value="@Model.OwnerFname" /></div>
+            <div class="inpfield"><span>Last Name:</span><input type="text" name="OwnerLname" id="OwnerFname" value="@Model.OwnerLname" /></div>
+            <div class="inpfield"><span>Address:</span><input type="text" name="OwnerAddress" id="OwnerAddress" value="@Model.OwnerAddress"/></div>
+            <div class="inpfield"><span>Phone (home):</span><input type="text" name="OwnerWorkPhone" id="OwnerWorkPhone" value="@Model.OwnerWorkPhone"/></div>
+            <div class="inpfield"><span>Phone (work):</span><input type="text" name="OwnerHomePhone" id="OwnerHomePhone" value="@Model.OwnerHomePhone"/></div>
+            <input type="submit" value="Add Owner" />
+        </form>
+    </div>
+    <div class="col2last"></div>
+    <div style="clear:both;"></div>
+</div>

@@ -129,6 +129,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\GroomServiceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OwnerController.cs" />
     <Compile Include="Controllers\PetController.cs" />
     <Compile Include="Controllers\SpeciesController.cs" />
     <Compile Include="Data\PetGroomingContext.cs" />
@@ -190,6 +191,8 @@
     <Compile Include="Models\Owner.cs" />
     <Compile Include="Models\Pet.cs" />
     <Compile Include="Models\Species.cs" />
+    <Compile Include="Models\ViewModels\ShowOwner.cs" />
+    <Compile Include="Models\ViewModels\ShowPet.cs" />
     <Compile Include="Models\ViewModels\UpdatePet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -244,6 +247,11 @@
     <Content Include="Views\GroomService\Update.cshtml" />
     <Content Include="Views\GroomService\New.cshtml" />
     <Content Include="Views\GroomService\DeleteConfirm.cshtml" />
+    <Content Include="Views\Owner\DeleteConfirm.cshtml" />
+    <Content Include="Views\Owner\List.cshtml" />
+    <Content Include="Views\Owner\New.cshtml" />
+    <Content Include="Views\Owner\Show.cshtml" />
+    <Content Include="Views\Owner\Update.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

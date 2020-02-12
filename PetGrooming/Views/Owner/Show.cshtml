@@ -1,0 +1,60 @@
+﻿
+@model PetGrooming.Models.ViewModels.ShowOwner
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>@Model.owner.OwnerFname @Model.owner.OwnerLname</h2>
+
+<div class="navbar">
+    <a class="navlink" href="/Owner/List">Back to List</a>
+    <a class="navlink" href="/Owner/Update/@Model.owner.OwnerID">Update</a>
+    <a class="navlink" href="/Owner/DeleteConfirm/@Model.owner.OwnerID">Delete</a>
+</div>
+<div>
+    <div class="col2">
+        <div><span>First Name:</span> @Model.owner.OwnerFname</div>
+        <div><span>Last Name:</span>@Model.owner.OwnerLname</div>
+        <div><span>Address:</span> @Model.owner.OwnerAddress</div>
+        <div><span>Phone (home):</span>@Model.owner.OwnerWorkPhone</div>
+        <div><span>Phone (work):</span>@Model.owner.OwnerHomePhone</div>
+        <input type="submit" value="Add Owner" />
+    </div>
+    <div class="col2last">
+        <div class="sectionheader">Pets Owned:</div>
+        @{ 
+
+            foreach (var pet in @Model.pets)
+            {
+                <div class="lineitem">
+                    <a href="/Pet/Show/@pet.PetID">@pet.PetName</a>
+                    @{ 
+                        //Rare instance of a double GET parameter
+                        //we are passing a link which contains the ownerID and petID
+                    }
+                    <a href="/Owner/DetachPet/@Model.owner.OwnerID?PetID=@pet.PetID">
+                        Remove Pet
+                    </a>
+                </div>
+            }
+
+        }
+        <form method="post" action="/Owner/AttachPet/@Model.owner.OwnerID">
+            <select name="PetID" id="PetID">
+                @{
+                    //prompt for user to add another pet to an owner record
+
+                    foreach (var pet in Model.all_pets)
+                    {
+                        <option value="@pet.PetID">
+                            @pet.PetName (@pet.Species.Name)
+                        </option>
+                    }
+                }
+            </select>
+            <input type="submit" value="Add Pet"/>
+        </form>
+        
+    </div>
+    <div style="clear:both;"></div>
+</div>

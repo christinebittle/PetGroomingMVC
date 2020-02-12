@@ -33,6 +33,7 @@ namespace PetGrooming.Controllers
             
             return View();
         }
+
         [HttpPost]
         public ActionResult Add(string ServiceName, decimal ServiceCost, int ServiceDuration)
         {

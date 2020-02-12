@@ -1,4 +1,4 @@
-﻿@model PetGrooming.Models.Pet
+﻿@model PetGrooming.Models.ViewModels.ShowPet
 
 @{
     ViewBag.Title = "Show";
@@ -7,25 +7,36 @@
 <h2>Show Pet</h2>
 <div class="navbar">
     <a class="navlink" href="/Pet/List">Back to List</a>
-    <a class="navlink" href="/Pet/Update/@Model.PetID">Update</a>
-    <a class="navlink" href="/Pet/DeleteConfirm/@Model.PetID">Delete</a>
+    <a class="navlink" href="/Pet/Update/@Model.pet.PetID">Update</a>
+    <a class="navlink" href="/Pet/DeleteConfirm/@Model.pet.PetID">Delete</a>
 </div>
 <div>
     <div class="col2">
-        <div>Name : @Model.PetName</div>
-        <div>Weight : @(Model.Weight)kg</div>
-        <div>Species : @Model.Species.Name</div>
+        <div>Name : @Model.pet.PetName</div>
+        <div>Weight : @(Model.pet.Weight)kg</div>
+        <div>Species : @Model.pet.Species.Name</div>
         <div>
             Notes :
             <div class="notepad">
-                @Model.Notes
+                @Model.pet.Notes
             </div>
         </div>
 
     </div>
     <div class="col2last">
         <div class="sectionheader">INFO ABOUT PET OWNERS HERE</div>
-        <div class="sectionheader">INFO ABOUT PET GROOMS HERE</div>
-    </div>     
+            @{
+
+            foreach (var owner in @Model.owners)
+            {
+                <div>
+                    <a href="/Owner/Show/@owner.OwnerID">@owner.OwnerLname, @owner.OwnerFname</a>
+                </div>
+            }
+
+                
+            }
+            <div class="sectionheader">INFO ABOUT PET GROOMS HERE</div>
+        </div>     
     <div style="clear:both;"></div>
 </div>

@@ -46,3 +46,5 @@ textarea {
 .col2, .col2last{float:left; margin-right:2%; width:49%;}
 .col2last{margin-right:0;}
 .sectionheader{background:#f3f3f3; padding:10px 8px; margin-bottom:20px;}
+
+.lineitem{padding-left:30px;margin-bottom:10px;}

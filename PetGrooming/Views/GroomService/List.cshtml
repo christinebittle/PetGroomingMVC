@@ -5,6 +5,9 @@
     ViewBag.Title = "List";
 }
 <h2>List of Services</h2>
+<div class="navbar">
+    <a class="navlink" href="/GroomService/New">Add New</a>
+</div>
 <div class="tilecontainer">
     @foreach (var service in @Model)
     {

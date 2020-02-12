@@ -60,12 +60,24 @@ namespace PetGrooming.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             // Pet pet = db.Pets.Find(id); //EF 6 technique
-            Pet pet = db.Pets.SqlQuery("select * from pets where petid=@PetID", new SqlParameter("@PetID",id)).FirstOrDefault();
-            if (pet == null)
+            Pet Pet = db.Pets.SqlQuery("select * from pets where petid=@PetID", new SqlParameter("@PetID",id)).FirstOrDefault();
+            if (Pet == null)
             {
                 return HttpNotFound();
             }
-            return View(pet);
+
+            //need information about the list of owners associated with that pet
+            string query = "select * from owners inner join PetOwners on Owners.OwnerID = PetOwners.Owner_OwnerID where Pet_PetID = @id";
+            SqlParameter param = new SqlParameter("@id", id);
+            List<Owner> PetOwners = db.Owners.SqlQuery(query, param).ToList();
+
+
+            ShowPet viewmodel = new ShowPet();
+            viewmodel.pet = Pet;
+            viewmodel.owners = PetOwners;
+
+
+            return View(viewmodel);
         }
 
         //THE [HttpPost] Means that this method will only be activated on a POST form submit to the following URL
