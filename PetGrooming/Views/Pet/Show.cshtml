@@ -11,7 +11,16 @@
     <a class="navlink" href="/Pet/DeleteConfirm/@Model.pet.PetID">Delete</a>
 </div>
 <div>
+    
     <div class="col2">
+        <div id="profilecontainer">
+            @{
+                if (Model.pet.HasPic == 1)
+                {
+                    <img src="../../Content/Pets/@(Model.pet.PetID).@(Model.pet.PicExtension)" alt="Image of @Model.pet.PetName" />
+                }
+            }
+        </div>
         <div>Name : @Model.pet.PetName</div>
         <div>Weight : @(Model.pet.Weight)kg</div>
         <div>Species : @Model.pet.Species.Name</div>
@@ -24,12 +33,12 @@
 
     </div>
     <div class="col2last">
-        <div class="sectionheader">INFO ABOUT PET OWNERS HERE</div>
+        <div class="sectionheader">Owners:</div>
             @{
 
             foreach (var owner in @Model.owners)
             {
-                <div>
+                <div class="lineitem">
                     <a href="/Owner/Show/@owner.OwnerID">@owner.OwnerLname, @owner.OwnerFname</a>
                 </div>
             }

@@ -12,6 +12,7 @@ using PetGrooming.Data;
 using PetGrooming.Models;
 using PetGrooming.Models.ViewModels;
 using System.Diagnostics;
+using System.IO;
 
 namespace PetGrooming.Controllers
 {
@@ -139,19 +140,64 @@ namespace PetGrooming.Controllers
         }
 
         [HttpPost]
-        public ActionResult Update(int id, string PetName, string PetColor, double PetWeight, string PetNotes, int SpeciesID)
+        public ActionResult Update(int id, string PetName, string PetColor, double PetWeight, string PetNotes, int SpeciesID, HttpPostedFileBase PetPic)
         {
+            //start off with assuming there is no picture
+
+            int haspic = 0;
+            string petpicextension = "";
+            //checking to see if some information is there
+            if (PetPic != null)
+            {
+                Debug.WriteLine("Something identified...");
+                //checking to see if the file size is greater than 0 (bytes)
+                if (PetPic.ContentLength > 0)
+                {
+                    Debug.WriteLine("Successfully Identified Image");
+                    //file extensioncheck taken from https://www.c-sharpcorner.com/article/file-upload-extension-validation-in-asp-net-mvc-and-javascript/
+                    var valtypes = new[] { "jpeg", "jpg", "png", "gif" };
+                    var extension = Path.GetExtension(PetPic.FileName).Substring(1);
+
+                    if (valtypes.Contains(extension))
+                    {
+                        try { 
+                            //file name is the id of the image
+                            string fn = id + "." + extension;
+
+                            //get a direct file path to ~/Content/Pets/{id}.{extension}
+                            string path = Path.Combine(Server.MapPath("~/Content/Pets/"), fn);
+
+                            //save the file
+                            PetPic.SaveAs(path);
+                            //if these are all successful then we can set these fields
+                            haspic = 1;
+                            petpicextension = extension;
+
+                        }
+                        catch(Exception ex)
+                        {
+                            Debug.WriteLine("Pet Image was not saved successfully.");
+                            Debug.WriteLine("Exception:"+ex);
+                        }
+
+
+
+                    }
+                }
+            }
 
             //Debug.WriteLine("I am trying to edit a pet's name to "+PetName+" and change the weight to "+PetWeight.ToString());
 
-            string query = "update pets set PetName=@PetName, SpeciesID=@SpeciesID, Weight=@PetWeight, color=@color, Notes=@Notes where PetID=@id";
-            SqlParameter[] sqlparams = new SqlParameter[6];
+            string query = "update pets set PetName=@PetName, SpeciesID=@SpeciesID, Weight=@PetWeight, color=@color, Notes=@Notes, HasPic=@haspic, PicExtension=@petpicextension where PetID=@id";
+            SqlParameter[] sqlparams = new SqlParameter[8];
             sqlparams[0] = new SqlParameter("@PetName", PetName);
             sqlparams[1] = new SqlParameter("@PetWeight", PetWeight);
             sqlparams[2] = new SqlParameter("@color", PetColor);
             sqlparams[3] = new SqlParameter("@SpeciesID", SpeciesID);
             sqlparams[4] = new SqlParameter("@Notes", PetNotes);
             sqlparams[5] = new SqlParameter("@id",id);
+            sqlparams[6] = new SqlParameter("@HasPic", haspic);
+            sqlparams[7] = new SqlParameter("@petpicextension",petpicextension);
 
             db.Database.ExecuteSqlCommand(query, sqlparams);
 

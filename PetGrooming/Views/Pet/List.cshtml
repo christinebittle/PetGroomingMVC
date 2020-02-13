@@ -13,10 +13,21 @@
         foreach (var Pet in Model)
         {
             <div class="listitem">
-                <div class="listcat"><a href="/Pet/Show/@Pet.PetID">@Pet.PetName</a></div>
-                <div class="listcat">Species : <span>@Pet.Species.Name</span></div>
-                <div class="listcat">Weight : <span>@(Pet.Weight)kg</span></div>
-                <span class="cta"><a href="/Pet/Update/@Pet.PetID">Update</a></span>
+                    <div class="itemimage">
+                        @{
+                            if (Pet.HasPic == 1)
+                            {
+                                <img src="../../Content/Pets/@(Pet.PetID).@(Pet.PicExtension)" alt="Image of @Pet.PetName" />
+                            }
+                        }
+                    </div>
+                    <div class="itemdetails">
+                        <div class="listcat"><a href="/Pet/Show/@Pet.PetID">@Pet.PetName</a></div>
+                        <div class="listcat">Species : <span>@Pet.Species.Name</span></div>
+                        <div class="listcat">Weight : <span>@(Pet.Weight)kg</span></div>
+                        <span class="cta"><a href="/Pet/Update/@Pet.PetID">Update</a></span>
+                    </div>
+                    <div style="clear:both;"></div>
             </div>
         }
     }

@@ -30,6 +30,8 @@ namespace PetGrooming.Models
         public string Color { get; set; }
         public string Notes { get; set; }
 
+        public int HasPic { get; set; }
+        public string PicExtension { get; set; }
 
 
         //Representing the Many in (One species to Many Pets)        

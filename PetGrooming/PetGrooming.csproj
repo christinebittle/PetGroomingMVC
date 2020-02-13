@@ -184,6 +184,14 @@
     <Compile Include="Migrations\202001292247345_booking_services_MxM.designer.cs">
       <DependentUpon>202001292247345_booking_services_MxM.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202002122102594_pet-haspic-field.cs" />
+    <Compile Include="Migrations\202002122102594_pet-haspic-field.designer.cs">
+      <DependentUpon>202002122102594_pet-haspic-field.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002122131261_pet-extension-field.cs" />
+    <Compile Include="Migrations\202002122131261_pet-extension-field.designer.cs">
+      <DependentUpon>202002122131261_pet-extension-field.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\GroomBooking.cs" />
     <Compile Include="Models\Groomer.cs" />
@@ -255,6 +263,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Pets\" />
     <Folder Include="Wireframes_ERD\" />
   </ItemGroup>
   <ItemGroup>
@@ -306,6 +315,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001292247345_booking_services_MxM.resx">
       <DependentUpon>202001292247345_booking_services_MxM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002122102594_pet-haspic-field.resx">
+      <DependentUpon>202002122102594_pet-haspic-field.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002122131261_pet-extension-field.resx">
+      <DependentUpon>202002122131261_pet-extension-field.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

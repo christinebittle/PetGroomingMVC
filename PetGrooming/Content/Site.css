@@ -38,6 +38,13 @@ textarea {
     box-sizing:border-box;
 
 }
+.itemdetails {
+    width:70%; float:left;
+}
+.itemimage{
+    width:25%; float:left; margin-right:5%;
+}
+.itemimage img{width:100%;}
 .inpfield textarea, .inpfield input[type="text"] {
     padding:2px 2px 2px 5px;
 }
@@ -48,3 +55,10 @@ textarea {
 .sectionheader{background:#f3f3f3; padding:10px 8px; margin-bottom:20px;}
 
 .lineitem{padding-left:30px;margin-bottom:10px;}
+
+#profilecontainer{max-width:200px;margin-bottom:30px;}
+#profilecontainer img{width:100%;}
+
+@media screen and (max-width:990px){
+    .listitem{  margin-bottom:20px; float:none; width:100%;}
+}

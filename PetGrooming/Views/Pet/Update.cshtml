@@ -9,7 +9,9 @@
 <div class="navbar">
     <a href="/Pet/List">Back to List</a>
 </div>
-<form action="/Pet/Update/@Model.Pet.PetID" method="POST">
+<!-- Do not forget enctype="multiplart/form-data" if you want to do file upload! -->
+<form action="/Pet/Update/@Model.Pet.PetID" method="POST" enctype="multipart/form-data">
+    <div class="inpfield"><span>Image: </span><input type="file" name="PetPic" id="PetPic"/></div>
     <div class="inpfield"><span>Pet Name: </span><input type="text" value="@Model.Pet.PetName" id="PetName" name="PetName" /> </div>
     <div class="inpfield"><span>Pet Color: </span><input type="text" value="@Model.Pet.Color" id="PetColor" name="PetColor" /> </div>
     <div class="inpfield"><span>Pet Weight: </span><input type="text" value="@Model.Pet.Weight" id="PetWeight" name="PetWeight" />kg </div>
