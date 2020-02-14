@@ -9,6 +9,10 @@
 <div class="navbar">
     <a href="/Species/Add">Add New</a>
 </div>
+<form method="GET" action="/Species/List">
+    <input type="text" id="speciessearchkey" name="speciessearchkey" />
+    <input type="submit" value="Search" />
+</form>
 <div class="tilecontainer">
     @{
         foreach (var species in @Model)

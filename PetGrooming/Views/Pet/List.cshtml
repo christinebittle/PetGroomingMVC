@@ -8,6 +8,10 @@
 <div class="navbar">
     <a class="navlink" href="/Pet/New">Add New</a>
 </div>
+<form action="/Pet/List" method="GET">
+    <input type="text" name="petsearchkey" id="petsearchkey" />
+    <input type="submit" value="Search" />
+</form>
 <div class="tilecontainer">
     @{
         foreach (var Pet in Model)

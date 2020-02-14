@@ -45,10 +45,21 @@ namespace PetGrooming.Controllers
         private PetGroomingContext db = new PetGroomingContext();
 
         // GET: Pet
-        public ActionResult List()
+        public ActionResult List(string petsearchkey)
         {
-            //How could we modify this to include a search bar?
-            List<Pet> pets = db.Pets.SqlQuery("Select * from Pets").ToList();
+            //can we access the search key?
+            Debug.WriteLine("The search key is "+petsearchkey);
+
+            string query = "Select * from Pets";
+
+            if (petsearchkey!="")
+            {
+                //modify the query to include the search key
+                query = query + " where petname like '%"+petsearchkey+"%'";
+                Debug.WriteLine("The query is "+ query);
+            }
+
+            List<Pet> pets = db.Pets.SqlQuery(query).ToList();
             return View(pets);
            
         }

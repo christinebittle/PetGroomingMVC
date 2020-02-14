@@ -25,10 +25,18 @@ namespace PetGrooming.Controllers
 
         //TODO: Each line should be a separate method in this class
         // List
-        public ActionResult List()
+        public ActionResult List(string speciessearchkey)
         {
+            Debug.WriteLine("The parameter is "+speciessearchkey);
+
+            string query = "Select * from species";
+            if (speciessearchkey!="")
+            {
+                query = query + " where Name like '%"+speciessearchkey+"%'";
+            }
+
             //what data do we need?
-            List<Species> myspecies = db.Species.SqlQuery("Select * from species").ToList();
+            List<Species> myspecies = db.Species.SqlQuery(query).ToList();
 
             return View(myspecies);
         }
