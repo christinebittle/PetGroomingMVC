@@ -1,0 +1,29 @@
+﻿@model PetGrooming.Models.Groomer
+
+
+@{
+    ViewBag.Title = "Add";
+}
+
+<h2>Udpate @Model.GroomerFName</h2>
+<div class="navbar">
+    <a class="navlink" href="/Groomer/List">Back to List</a>
+</div>
+<form method="POST" action="/Groomer/Update/@Model.GroomerID">
+    @{ 
+        //convert to currency (string format)
+        //https://stackoverflow.com/questions/21464496/format-decimal-value-to-currency-with-2-decimal-places
+        //NOTE: there are alternative ways to convert using cultureinfo property (harder to configure).
+        string Rate =   String.Format("{0:0.00}", ((decimal)Model.GroomerRate / 100));
+        string DOB = Model.GroomerDOB.ToString("yyyy-MM-dd");
+
+    }
+    <div class="inpfield"><span>First Name:</span><input value="@Model.GroomerFName" id="GroomerFName" type="text" name="GroomerFname" /></div>
+    <div class="inpfield"><span>Last Name:</span><input value="@Model.GroomerLName" id="GroomerLName" type="text" name="GroomerLName" /></div>
+    <div class="inpfield"><span>Rate:</span> <input value="@Rate" id="GroomerRate" type="text" name="GroomerRate" /></div>
+    <div class="inpfield"><span>DOB (yyyy-mm-dd):</span><input value="@DOB" id="GroomerDOB" type="text" name="GroomerDOB" /></div>
+
+    <div class="inpfield">
+        <input type="submit" value="Update Groomer">
+    </div>
+</form>

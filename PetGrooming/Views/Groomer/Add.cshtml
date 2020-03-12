@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Add";
+}
+
+<h2>Add a New Groomer</h2>
+<div class="navbar">
+    <a class="navlink" href="/Groomer/List">Back to List</a>
+</div>
+<form method="POST" action="/Groomer/Add">
+    <div class="inpfield"><span>First Name:</span><input id="GroomerFName" type="text" name="GroomerFname" /></div>
+    <div class="inpfield"><span>Last Name:</span><input id="GroomerLName" type="text" name="GroomerLName" /></div>
+    <div class="inpfield"><span>Rate:</span> <input id="GroomerRate" type="text" name="GroomerRate" /></div>
+    <div class="inpfield"><span>DOB (yyyy-mm-dd):</span><input id="GroomerDOB" type="text" name="GroomerDOB" /></div>
+    
+    <div class="inpfield">
+        <input type="submit" value="Add Groomer">
+    </div>
+</form>

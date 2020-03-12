@@ -1,0 +1,34 @@
+﻿@model List<PetGrooming.Models.GroomBooking>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List of Bookings</h2>
+<div class="navbar">
+    <a class="navlink" href="/GroomBooking/New">Add New</a>
+</div>
+<form action="/GroomBooking/List" method="GET">
+    <input type="text" name="bookingsearchkey" id="bookingsearchkey" />
+    <input type="submit" value="Search" />
+</form>
+<div class="tilecontainer">
+    @{
+        foreach (var Booking in Model)
+        {
+            <div class="listitem">
+           
+                <div class="itemdetails">
+                    <div class="listitem">Price: @Booking.GroomBookingPrice</div>
+                    <div class="listcat">Date/Time: @Booking.GroomBookingDate</div>
+                    <div class="listcat">Pet: @Booking.Pet.PetName</div>
+                    <div class="listcat">Billed To: @Booking.Owner.OwnerFname  @Booking.Owner.OwnerLname</div>
+                    <div class="listcat">Groomed By: @Booking.Groomer.GroomerFName</div>
+                    <span class="cta"></span>
+                </div>
+                <div style="clear:both;"></div>
+            </div>
+        }
+    }
+    <div style="clear:both;"></div>
+</div>

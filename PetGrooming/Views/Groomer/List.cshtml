@@ -1,0 +1,40 @@
+﻿@model List<PetGrooming.Models.Groomer>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List of Groomers</h2>
+<div class="navbar">
+    <a class="navlink" href="/Groomer/New">Add New</a>
+</div>
+<form action="/Groomer/List" method="GET">
+    <input type="text" name="groomersearchkey" id="groomersearchkey" />
+    <input type="submit" value="Search" />
+</form>
+<div class="tilecontainer">
+    @{
+        foreach (var Groomer in Model)
+        {
+            <div class="listitem">
+                @{ 
+                    //convert to currency (string format)
+                    //https://stackoverflow.com/questions/21464496/format-decimal-value-to-currency-with-2-decimal-places
+                    //NOTE: there are alternative ways to convert using cultureinfo property (harder to configure).
+                    string Rate = String.Format("{0:C2}",((decimal)Groomer.GroomerRate/ 100));
+                    string DOB = Groomer.GroomerDOB.ToString("yyyy-MM-dd");
+
+                }
+
+                <div class="itemdetails">
+                    <div class="listcat"><a href="/Groomer/Show/@Groomer.GroomerID">@Groomer.GroomerFName  @Groomer.GroomerLName</a></div>
+                    <div class="listcat">DOB : <span>@DOB</span></div>
+                    <div class="listcat">Rate : <span>@Rate</span></div>
+                    <span class="cta"><a href="/Groomer/Update/@Groomer.GroomerID">Update</a></span>
+                </div>
+                <div style="clear:both;"></div>
+            </div>
+        }
+    }
+    <div style="clear:both;"></div>
+</div>

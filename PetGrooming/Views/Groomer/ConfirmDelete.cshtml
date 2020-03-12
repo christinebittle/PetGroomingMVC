@@ -1,0 +1,14 @@
+﻿
+
+@model PetGrooming.Models.Groomer
+@{
+    ViewBag.Title = "ConfirmDelete";
+}
+
+<h2>Are you sure you want to Delete @Model.GroomerFName?</h2>
+
+<form method="POST" action="/Groomer/Delete/@Model.GroomerID">
+
+    <input type="submit" value="Delete Groomer" />
+
+</form>
