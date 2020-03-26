@@ -7,10 +7,16 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.ComponentModel.DataAnnotations.Schema;
+using PetGrooming.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace PetGrooming.Data
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
+    // The application user class is the class that is used to describe someone who is logged in
+    // We are leveraging this class by associating it with a Groomer and an Owner.
+    
     public class ApplicationUser : IdentityUser
     {
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
@@ -20,8 +26,18 @@ namespace PetGrooming.Data
             // Add custom user claims here
             return userIdentity;
         }
+
+        //A logged in user could be a Groomer
+        public virtual Groomer Groomer { get; set; }
+
+        //A logged in user could be an Owner
+        public virtual Owner Owner { get; set; }
+
+        //A logged in user could be an Admin
     }
 
+    //PetGroomingContext class has been adjusted to become a subclass of IdentityDbContext instead of DbContext
+    //Why? Because This class helps support base login functionality (IdentityDbContext).
     public class PetGroomingContext : IdentityDbContext<ApplicationUser>
     {
         // You can add custom code to this file. Changes will not be overwritten.

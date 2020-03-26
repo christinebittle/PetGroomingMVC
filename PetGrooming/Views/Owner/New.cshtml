@@ -8,9 +8,29 @@
 <div class="navbar">
     <a class="navlink" href="/Owner/List">Back to List</a>
 </div>
+<div class="errorbox">
+    @{ 
+        if (ViewBag.ErrorMessage != null)
+        {
+            @ViewBag.ErrorMessage
+            <ul>
+                @foreach (var Error in ViewBag.Errors)
+                {
+                    <li>@Error</li>
+                }
+            </ul>
+        }
+    }
+
+</div>
 <div>
     <div class="col2">
         <form method="post" action="/Owner/Add">
+            <div class="sectionheader">Account Details</div>
+            <div class="inpfield"><span>User Name:</span><input type="text" name="Username" id="Username" /></div>
+            <div class="inpfield"><span>Email:</span><input type="text" name="Useremail" id="Useremail" /></div>
+            <div class="inpfield"><span>Password:</span><input type="password" name="Userpass" id="Userpass" /></div>
+            <div class="sectionheader">Owner Details</div>
             <div class="inpfield"><span>First Name:</span><input type="text" name="OwnerFname" id="OwnerFname" /></div>
             <div class="inpfield"><span>Last Name:</span><input type="text" name="OwnerLname" id="OwnerFname" /></div>
             <div class="inpfield"><span>Address:</span><input type="text" name="OwnerAddress" id="OwnerAddress" /></div>

@@ -1,7 +1,102 @@
-﻿
+﻿@model  PetGrooming.Models.ViewModels.UpdateBooking
 @{
-    ViewBag.Title = "Update";
+    ViewBag.Title = "Add";
 }
 
-<h2>Update</h2>
+<h2>Add a Booking</h2>
+<div class="navbar">
+    <a class="navlink" href="/GroomBooking/List">Back to List</a>
+</div>
+<form method="POST" action="/GroomBooking/Update/@Model.Booking.GroomBookingID">
+    @{ 
+        //INTAKE : GroomBooking DateTime
+        //OUTPUT : Date and Time separately
+        string BookingDate = Model.Booking.GroomBookingDate.ToString("yyyy-MM-dd");
+        string BookingTime = Model.Booking.GroomBookingDate.ToString("Hmm");
+        string Price =   String.Format("{0:0.00}", ((decimal)Model.Booking.GroomBookingPrice / 100));
 
+    }
+    <!-- could replace this with calendar picker -->
+    <div class="inpfield"><span>Date (yyyy-mm-dd):</span><input name="BookingDate" type="text" value="@BookingDate"/></div>
+    <div class="inpfield">
+        <span>Time:</span>
+        <select name="BookingTime">
+            @{
+                var i = 800; //say business opens at 8am
+            }
+
+            @while (i <= 1600)
+            { //continue until 4pm
+                //we use "military time" to pass the time value i.e. 1300 = 1pm
+                //we use some clever string and integer techniques to put them into a readable format
+
+                string meridian = "AM";
+                if (i >= 1200) { meridian = "PM"; }
+                string disptime = (i % 1200).ToString("00:00") + meridian;
+                if (disptime.StartsWith("00")) { disptime = "12" + disptime.Substring(2); }
+
+                string selected = "";
+                if (i.ToString() == BookingTime) { selected = "selected"; }
+                <option value="@i" @selected>@disptime</option>
+
+                //adds either 30 or 70 to i
+                i = i + ((i % 100 == 30) ? 70 : 30);
+            }
+        </select>
+
+    </div>
+    <div class="inpfield"><span>Price:</span><input type="text" name="BookingPrice" value="@Price"/></div>
+    <div class="inpfield">
+        <span>Pet:</span>
+        <select name="PetID">
+            @foreach (var pet in Model.Pets)
+            {
+                string selected = "";
+                if (Model.Booking.PetID == pet.PetID) { selected = "selected"; }
+                <option value="@pet.PetID" @selected>@pet.PetName (@pet.Species.Name)</option>
+            }
+        </select>
+    </div>
+    <div class="inpfield">
+        <span>Billed To:</span>
+        <select name="OwnerID">
+            @foreach (var owner in Model.Owners)
+            {
+                string selected = "";
+                if (Model.Booking.OwnerID == owner.OwnerID) { selected = "selected"; }
+                <option value="@owner.OwnerID" @selected>@owner.OwnerLname, @owner.OwnerFname</option>
+            }
+        </select>
+    </div>
+    <div class="inpfield">
+        <span>Groomer:</span>
+        <select name="GroomerID">
+            @foreach (var groomer in Model.Groomers)
+            {
+                string selected = "";
+                if (Model.Booking.GroomerID == groomer.GroomerID) { selected = "selected"; }
+                <option value="@groomer.GroomerID" @selected>@groomer.GroomerLName, @groomer.GroomerFName </option>
+            }
+        </select>
+    </div>
+    <div class="inpfield">
+        <span>Services:</span>
+        <div style="margin-left:20px;">
+            
+            @foreach (var service in Model.Services)
+            {
+                
+                string service_checked = "";
+                if (Model.Booking.GroomServices.Contains(service)) { service_checked = "checked"; }
+                <br />
+                <input name="BookingServices" id="groomservice_@service.GroomServiceID"
+                       type="checkbox"
+                       value="@service.GroomServiceID"
+                       @service_checked />
+                <label for="groomservice_@service.GroomServiceID">@service.ServiceName</label>
+                
+            }
+        </div>
+    </div>
+    <input type="submit" value="Update Booking" />
+</form>

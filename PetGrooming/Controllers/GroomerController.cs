@@ -13,12 +13,27 @@ using PetGrooming.Models;
 using PetGrooming.Models.ViewModels;
 using System.Diagnostics;
 using System.Globalization; //for cultureinfo.invariantculture
+//needed for await
+using System.Threading.Tasks;
+//needed for other sign in feature classes
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+
 
 namespace PetGrooming.Controllers
 {
     public class GroomerController : Controller
     {
+        //need this to work with the login functionalities
+        private ApplicationSignInManager _signInManager;
+        private ApplicationUserManager _userManager;
+        //reference how the Account Controller instantiates the controller class with SignInManager and UserManager
+
         private PetGroomingContext db = new PetGroomingContext();
+        //parameterless constructor function
+        public GroomerController(){}
+        
         // GET: Groomer
         public ActionResult Index()
         {
@@ -60,28 +75,54 @@ namespace PetGrooming.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(string GroomerFName, string GroomerLName, string GroomerDOB, decimal GroomerRate)
+        public async Task<ActionResult> Add(string Username, string Useremail, string Userpass, string GroomerFName, string GroomerLName, string GroomerDOB, decimal GroomerRate)
         {
-            
-            Groomer NewGroomer = new Groomer();
-            
-            NewGroomer.GroomerFName = GroomerFName;
-            NewGroomer.GroomerLName = GroomerLName;
-            NewGroomer.GroomerDOB = DateTime.ParseExact(GroomerDOB,"yyyy-MM-dd",CultureInfo.InvariantCulture);
-            NewGroomer.GroomerRate = (int)(GroomerRate*100);
+            //before creating a groomer, we would like to create a user.
+            //this user will be linked with an owner.
+            ApplicationUser NewUser = new ApplicationUser();
+            NewUser.UserName = Username;
+            NewUser.Email = Useremail;
+            //code interpreted from AccountController.cs Register Method
+            IdentityResult result = await UserManager.CreateAsync(NewUser, Userpass);
 
-            //SQL equivalent : INSERT INTO GROOMERS (GroomerFname, .. ) VALUES (@GroomerFname..)
-            db.Groomers.Add(NewGroomer);
-           
-            db.SaveChanges();
+            if (result.Succeeded)
+            {
+                //need to find the user we just created -- get the ID
+                string Id = NewUser.Id; //what was the id of the new account?
+                //link this id to the Owner
+                string GroomerID = Id;
 
 
 
-            return RedirectToAction("List");
+                Groomer NewGroomer = new Groomer();
+                NewGroomer.GroomerID = Id;
+                NewGroomer.GroomerFName = GroomerFName;
+                NewGroomer.GroomerLName = GroomerLName;
+                NewGroomer.GroomerDOB = DateTime.ParseExact(GroomerDOB, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                NewGroomer.GroomerRate = (int)(GroomerRate * 100);
+
+                //SQL equivalent : INSERT INTO GROOMERS (GroomerFname, .. ) VALUES (@GroomerFname..)
+                db.Groomers.Add(NewGroomer);
+
+                db.SaveChanges();
+            }
+            else
+            {
+                //Simple way of displaying errors
+                ViewBag.ErrorMessage = "Something Went Wrong!";
+                ViewBag.Errors = new List<string>();
+                foreach (var error in result.Errors)
+                {
+                    ViewBag.Errors.Add(error);
+                }
+            }
+
+
+            return View();
         }
 
 
-        public ActionResult Update(int id)
+        public ActionResult Update(string id)
         {
             //select * from groomers where groomerid = @id
             Groomer SelectedGroomer = db.Groomers.Find(id);
@@ -91,7 +132,7 @@ namespace PetGrooming.Controllers
         }
 
         [HttpPost]
-        public ActionResult Update(int id, string GroomerFName, string GroomerLName, string GroomerDOB, decimal GroomerRate)
+        public ActionResult Update(string id, string GroomerFName, string GroomerLName, string GroomerDOB, decimal GroomerRate)
         {
          
             //SQL Equivalent : select * from groomers where groomerid = @id
@@ -108,7 +149,7 @@ namespace PetGrooming.Controllers
             return RedirectToAction("List");
         }
 
-        public ActionResult Show(int id)
+        public ActionResult Show(string id)
         {
             //sql equivalent : select * from groomers where groomerid = @id
             Groomer SelectedGroomer = db.Groomers.Find(id);
@@ -120,6 +161,7 @@ namespace PetGrooming.Controllers
             //[booking => booking.GroomerID == id] => where groomerid = @id
             //[.ToList()] => select * from groombookings
             List<GroomBooking> Bookings = db.GroomBookings
+                .Include(booking=>booking.GroomServices)
                 .Where(booking => booking.GroomerID == id)
                 .ToList();
 
@@ -133,7 +175,7 @@ namespace PetGrooming.Controllers
             return View(ViewModel);
         }
 
-        public ActionResult ConfirmDelete(int id)
+        public ActionResult ConfirmDelete(string id)
         {
             Groomer SelectedGroomer = db.Groomers.Find(id);
 
@@ -141,16 +183,51 @@ namespace PetGrooming.Controllers
         }
 
         [HttpPost]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string id)
         {
             //find the groomer
             Groomer SelectedGroomer = db.Groomers.Find(id);
             //sql equivalent : delete from groomers where groomerid=@id 
             db.Groomers.Remove(SelectedGroomer);
+
+            ApplicationUser User = db.Users.Find(id);
+            //also remove the account
+            db.Users.Remove(User);
             
             db.SaveChanges();
 
             return RedirectToAction("List");
+        }
+
+        //how to get the UserManager and SignInManager from the server
+        public GroomerController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        {
+            UserManager = userManager;
+            SignInManager = signInManager;
+        }
+
+        public ApplicationSignInManager SignInManager
+        {
+            get
+            {
+                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+            }
+            private set
+            {
+                _signInManager = value;
+            }
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
         }
     }
 }

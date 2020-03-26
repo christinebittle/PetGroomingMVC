@@ -7,12 +7,33 @@
 <div class="navbar">
     <a class="navlink" href="/Groomer/List">Back to List</a>
 </div>
+
+<div class="errorbox">
+    @{
+        if (ViewBag.ErrorMessage != null)
+        {
+            @ViewBag.ErrorMessage
+            <ul>
+                @foreach (var Error in ViewBag.Errors)
+                {
+                    <li>@Error</li>
+                }
+            </ul>
+        }
+    }
+
+</div>
 <form method="POST" action="/Groomer/Add">
+    <div class="sectionheader">Account Details</div>
+    <div class="inpfield"><span>User Name:</span><input type="text" name="Username" id="Username" /></div>
+    <div class="inpfield"><span>Email:</span><input type="text" name="Useremail" id="Useremail" /></div>
+    <div class="inpfield"><span>Password:</span><input type="password" name="Userpass" id="Userpass" /></div>
+    <div class="sectionheader">Groomer Details</div>
     <div class="inpfield"><span>First Name:</span><input id="GroomerFName" type="text" name="GroomerFname" /></div>
     <div class="inpfield"><span>Last Name:</span><input id="GroomerLName" type="text" name="GroomerLName" /></div>
     <div class="inpfield"><span>Rate:</span> <input id="GroomerRate" type="text" name="GroomerRate" /></div>
     <div class="inpfield"><span>DOB (yyyy-mm-dd):</span><input id="GroomerDOB" type="text" name="GroomerDOB" /></div>
-    
+
     <div class="inpfield">
         <input type="submit" value="Add Groomer">
     </div>

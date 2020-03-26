@@ -32,7 +32,7 @@ textarea {
 .navlink{margin-right: 30px;}
 .notepad{background:#dffe4d; padding:15px; max-width:500px; margin-top:15px;}
 .inpfield{ max-width:500px; display:block; padding: 10px 0;}
-.inpfield input[type="text"], .inpfield select, .inpfield textarea {
+.inpfield input[type="text"], .inpfield input[type="password"], .inpfield select, .inpfield textarea {
     float: right;
     width: 350px;
     box-sizing:border-box;
@@ -52,7 +52,7 @@ textarea {
 .inpfield::after{clear:both;}
 .col2, .col2last{float:left; margin-right:2%; width:49%;}
 .col2last{margin-right:0;}
-.sectionheader{background:#f3f3f3; padding:10px 8px; margin-bottom:20px;}
+.sectionheader{background:#f3f3f3; padding:10px 8px; margin-bottom:20px;margin-top:20px;}
 
 .lineitem{padding-left:30px;margin-bottom:10px;}
 

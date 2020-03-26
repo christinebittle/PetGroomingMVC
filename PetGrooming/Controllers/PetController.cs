@@ -83,10 +83,18 @@ namespace PetGrooming.Controllers
             SqlParameter param = new SqlParameter("@id", id);
             List<Owner> PetOwners = db.Owners.SqlQuery(query, param).ToList();
 
+            //need information about the grooms booked for this pet
+            //note: would do a standard join to get the owner of this booking
+            //however, cannot force this information into the model
+            //must use linq in this situation
+            List<GroomBooking> BookedGrooms = db.GroomBookings.Include(b=>b.Owner).ToList();
+
+
 
             ShowPet viewmodel = new ShowPet();
             viewmodel.pet = Pet;
             viewmodel.owners = PetOwners;
+            viewmodel.bookedgrooms = BookedGrooms;
 
 
             return View(viewmodel);

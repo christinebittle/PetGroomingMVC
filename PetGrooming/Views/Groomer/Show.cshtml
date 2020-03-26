@@ -28,23 +28,24 @@
         <div class="inpfield"><span>DOB (yyyy-mm-dd):</span>@DOB</div>
     </div>
     <div class="col2last">
-        <div class="sectionheader">Grooms Booked:</div>
-        @{ 
-            foreach (var booking in Model.bookings)
-            {
-                string Date = booking.GroomBookingDate.ToString("yyyy-MM-dd");
-                string Cost = String.Format("{0:C2}", ((decimal)booking.GroomBookingPrice / 100));
+        <div class="sectionheader">Appointments Booked</div>
+        @foreach (var booking in Model.bookings)
+        {
 
-                <div class="lineitem">@Date with @booking.Pet.PetName for @Cost</div>
-                <div class="lineitem">Services: 
-                   @{ 
-                       //TODO: Add Groom Services
-                   }
-                   
-        
-                </div>
-            }
-
+            string dispdate = booking.GroomBookingDate.ToString("dd MMM yyyy");
+            string Price = String.Format("{0:0.00}", ((decimal)booking.GroomBookingPrice / 100));
+            <div class="lineitem">
+                Date : <a href="/GroomBooking/Show/@booking.GroomBookingID">@dispdate</a><br />
+                Cost : @Price<br />
+                Pet : <a href="/Pet/Show/@booking.Pet.PetID">@booking.Pet.PetName</a><br />
+                Services : 
+                <ul>
+                    @foreach (var service in booking.GroomServices)
+                    {
+                        <li>@service.ServiceName</li>
+                    }
+                </ul>
+            </div>
         }
     </div>
     <div class="clearfix"></div>

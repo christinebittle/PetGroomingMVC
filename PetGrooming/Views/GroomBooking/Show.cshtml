@@ -1,7 +1,51 @@
-﻿
+﻿@model  PetGrooming.Models.GroomBooking
 @{
-    ViewBag.Title = "Show";
+    ViewBag.Title = "Add";
 }
 
-<h2>Show</h2>
+<h2>View Booking</h2>
+<div class="navbar">
+    <a class="navlink" href="/GroomBooking/List">Back to List</a>
+    <a class="navlink" href="/GroomBooking/Update/@Model.GroomBookingID">Update</a>
+</div>
+@{
+    //INTAKE : GroomBooking DateTime
+    //OUTPUT : Date and Time separately
+    string BookingDate = Model.GroomBookingDate.ToString("yyyy-MM-dd");
+    string BookingTime = Model.GroomBookingDate.ToString("H:mm tt");
+    string Price = String.Format("{0:0.00}", ((decimal)Model.GroomBookingPrice / 100));
+
+}
+<!-- could replace this with calendar picker -->
+<div class="inpfield"><span>Date and Time:</span> @BookingDate @BookingTime</div>
+    
+<div class="inpfield"><span>Price:</span>@Price</div>
+<div class="inpfield">
+    <span>Pet:</span>
+    <a href="/Pet/Show/@Model.Pet.PetID">@Model.Pet.PetName</a>
+</div>
+<div class="inpfield">
+    <span>Billed To:</span>
+    <a href="/Owner/Show/@Model.Owner.OwnerID">@Model.Owner.OwnerLname, @Model.Owner.OwnerFname</a>
+</div>
+<div class="inpfield">
+    <span>Groomer:</span>
+    <a href="/Groomer/Show/@Model.Groomer.GroomerID">@Model.Groomer.GroomerLName, @Model.Groomer.GroomerFName</a>
+</div>
+<div class="inpfield">
+    <span>Services:</span>
+    <div style="margin-left:20px; margin-top:10px;">
+        @if(Model.GroomServices != null) { 
+            foreach (var service in Model.GroomServices)
+            {
+
+                string Cost = String.Format("{0:C2}", ((decimal)service.ServiceCost/100));
+                <div class="listitem">@service.ServiceName <br /> @Cost <br /> @service.ServiceDuration mins</div>
+                
+
+            }
+            <div class="clearfix"></div>
+        }
+    </div>
+</div>
 

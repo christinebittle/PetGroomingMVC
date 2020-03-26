@@ -9,6 +9,8 @@ namespace PetGrooming.Models
     /*
     The structure for this file has been ported over into PetGroomingContext
 
+    This file is very similar to a database context file. The difference is that it is of type "IdentityDbContext"
+    instead of type "DbContext"
 
 
 

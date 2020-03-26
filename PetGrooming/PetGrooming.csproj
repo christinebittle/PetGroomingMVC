@@ -232,6 +232,10 @@
     <Compile Include="Migrations\202003182228087_login_application_user_full.designer.cs">
       <DependentUpon>202003182228087_login_application_user_full.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003242141332_one_one_identityuser.cs" />
+    <Compile Include="Migrations\202003242141332_one_one_identityuser.designer.cs">
+      <DependentUpon>202003242141332_one_one_identityuser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\GroomBooking.cs" />
@@ -242,9 +246,11 @@
     <Compile Include="Models\Owner.cs" />
     <Compile Include="Models\Pet.cs" />
     <Compile Include="Models\Species.cs" />
+    <Compile Include="Models\ViewModels\AddBooking.cs" />
     <Compile Include="Models\ViewModels\ShowGroomer.cs" />
     <Compile Include="Models\ViewModels\ShowOwner.cs" />
     <Compile Include="Models\ViewModels\ShowPet.cs" />
+    <Compile Include="Models\ViewModels\UpdateBooking.cs" />
     <Compile Include="Models\ViewModels\UpdatePet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\GroomBookingController.cs" />
@@ -402,6 +408,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003182228087_login_application_user_full.resx">
       <DependentUpon>202003182228087_login_application_user_full.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003242141332_one_one_identityuser.resx">
+      <DependentUpon>202003242141332_one_one_identityuser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

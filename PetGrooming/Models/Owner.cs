@@ -5,6 +5,8 @@ using System.Web;
 //Install  entity framework 6 on Tools > Manage Nuget Packages > Microsoft Entity Framework (ver 6.4)
 using System.Data.Entity;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using PetGrooming.Data;
 
 namespace PetGrooming.Models
 {
@@ -22,7 +24,11 @@ namespace PetGrooming.Models
             An owner must reference a list of pets
             
         */
-        public int OwnerID { get; set; }
+        [Key,ForeignKey("ApplicationUser")]
+        public string OwnerID { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
+
+
         public string OwnerFname { get; set; }
         public string OwnerLname { get; set; }
         public string OwnerAddress { get; set; }
@@ -35,6 +41,7 @@ namespace PetGrooming.Models
 
         //Representing the "Many" in (Many Owners to Many Pets)
         public ICollection<Pet> Pets { get; set; }
+
 
     }
 }

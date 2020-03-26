@@ -34,7 +34,7 @@
     </div>
     <div class="col2last">
         <div class="sectionheader">Owners:</div>
-            @{
+        @{
 
             foreach (var owner in @Model.owners)
             {
@@ -43,9 +43,21 @@
                 </div>
             }
 
-                
-            }
-            <div class="sectionheader">INFO ABOUT PET GROOMS HERE</div>
-        </div>     
+
+        }
+        
+        <div class="sectionheader">Appointments Booked</div>
+        @foreach (var booking in Model.bookedgrooms)
+        {
+
+            string dispdate = booking.GroomBookingDate.ToString("dd MMM yyyy");
+            string Price = String.Format("{0:0.00}", ((decimal)booking.GroomBookingPrice / 100));
+            <div class="lineitem">
+                Date : <a href="/GroomBooking/Show/@booking.GroomBookingID">@dispdate</a><br />
+                Cost : @Price<br />
+                Billed Owner : <a href="/Owner/Show/@booking.OwnerID">@booking.Owner.OwnerFname @booking.Owner.OwnerLname</a>
+            </div>
+        }
+    </div>     
     <div style="clear:both;"></div>
 </div>

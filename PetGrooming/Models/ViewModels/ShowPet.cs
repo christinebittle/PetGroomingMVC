@@ -12,5 +12,8 @@ namespace PetGrooming.Models.ViewModels
 
         //information about multiple owners
         public List<Owner> owners { get; set; }
+
+        //information about grooms booked for this pet
+        public List<GroomBooking> bookedgrooms { get; set; }
     }
 }

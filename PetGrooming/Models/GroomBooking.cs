@@ -40,12 +40,12 @@ namespace PetGrooming.Models
         public virtual Pet Pet { get; set; }
 
         //Representing the Many in (One Groomer to Many Bookings)
-        public int GroomerID { get; set; }
+        public string GroomerID { get; set; }
         [ForeignKey("GroomerID")]
         public virtual Groomer Groomer { get; set; }
 
         //Representing the Many in (One Owner to Many Bookings)
-        public int OwnerID { get; set; }
+        public string OwnerID { get; set; }
         [ForeignKey("OwnerID")]
         public virtual Owner Owner { get; set; }
         
