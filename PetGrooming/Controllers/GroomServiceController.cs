@@ -20,10 +20,36 @@ namespace PetGrooming.Controllers
         private PetGroomingContext db = new PetGroomingContext();
 
         // GET: GroomService/List
-        public ActionResult List()
+        public ActionResult List(string servicesearchkey, int pagenum = 0)
         {
             //How could we modify this to include a search bar?
-            List<GroomService> groomservices = db.GroomServices.SqlQuery("Select * from GroomServices").ToList();
+            List<GroomService> groomservices = db
+                .GroomServices
+                .Where(g => (servicesearchkey != null) ? g.ServiceName.Contains(servicesearchkey) : true)
+                .ToList();
+
+            //start of pagination algorithm (LINQ techniques)
+            int perpage = 3;
+            int petcount = groomservices.Count();
+            int maxpage = (int)Math.Ceiling((decimal)petcount / perpage) - 1;
+            if (maxpage < 0) maxpage = 0;
+            if (pagenum < 0) pagenum = 0;
+            if (pagenum > maxpage) pagenum = maxpage;
+            int start = (int)(perpage * pagenum);
+            ViewData["pagenum"] = pagenum;
+            ViewData["pagesummary"] = "";
+            if (maxpage > 0)
+            {
+                ViewData["pagesummary"] = (pagenum + 1) + " of " + (maxpage + 1);
+                groomservices = db.GroomServices
+                    .Where(g => (servicesearchkey != null) ? g.ServiceName.Contains(servicesearchkey) : true)
+                    .OrderBy(g=>g.GroomServiceID)
+                    .Skip(start)
+                    .Take(perpage)
+                    .ToList();
+            }
+            //end of pagination algorithm (LINQ techniques)
+
             return View(groomservices);
 
         }

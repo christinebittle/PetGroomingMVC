@@ -57,21 +57,57 @@ namespace PetGrooming.Controllers
         public PetController(){ }
 
         // GET: Pet
-        public ActionResult List(string petsearchkey)
+        public ActionResult List(string petsearchkey, int pagenum=0)
         {
             //can we access the search key?
-            Debug.WriteLine("The search key is "+petsearchkey);
+            //Debug.WriteLine("The search key is "+petsearchkey);
 
-            string query = "Select * from Pets";
+            
+
+            string query = "Select * from Pets"; //order by is needed for offset
+            //easier in a list.. we don't know how many more we'll add yet
+            List<SqlParameter> sqlparams = new List<SqlParameter>();
 
             if (petsearchkey!="")
             {
                 //modify the query to include the search key
-                query = query + " where petname like '%"+petsearchkey+"%'";
+                query = query + " where petname like @searchkey";
+                sqlparams.Add(new SqlParameter("@searchkey", "%"+petsearchkey+"%"));
                 //Debug.WriteLine("The query is "+ query);
             }
 
-            List<Pet> pets = db.Pets.SqlQuery(query).ToList();
+            List<Pet> pets = db.Pets.SqlQuery(query, sqlparams.ToArray()).ToList();
+
+            //Start of Pagination Algorithm (Raw MSSQL)
+            int perpage = 3;
+            int petcount = pets.Count();
+            int maxpage = (int)Math.Ceiling((decimal)petcount/perpage) - 1;
+            if (maxpage < 0) maxpage = 0;
+            if (pagenum < 0) pagenum = 0;
+            if (pagenum > maxpage) pagenum = maxpage;
+            int start = (int)(perpage * pagenum);
+            ViewData["pagenum"] = pagenum;
+            ViewData["pagesummary"] = "";
+            if (maxpage > 0)
+            {
+                ViewData["pagesummary"] = (pagenum + 1) + " of " + (maxpage + 1);
+                List<SqlParameter> newparams = new List<SqlParameter>();
+
+                if (petsearchkey != "")
+                {
+                    newparams.Add(new SqlParameter("@searchkey", "%" + petsearchkey + "%"));
+                    ViewData["petsearchkey"] = petsearchkey;
+                }
+                newparams.Add( new SqlParameter("@start", start));
+                newparams.Add( new SqlParameter("@perpage", perpage));
+                string pagedquery = query + " order by PetID offset @start rows fetch first @perpage rows only ";
+                Debug.WriteLine(pagedquery);
+                Debug.WriteLine("offset "+start);
+                Debug.WriteLine("fetch first "+perpage);
+                pets = db.Pets.SqlQuery(pagedquery, newparams.ToArray()).ToList();
+            }
+            //End of Pagination Algorithm
+
             return View(pets);
            
         }

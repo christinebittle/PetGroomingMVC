@@ -8,6 +8,17 @@
 <div class="navbar">
     <a class="navlink" href="/GroomService/New">Add New</a>
 </div>
+<div class="paginate">
+    @{
+        <a href="/GroomService/List?pagenum=@((int)ViewData["pagenum"]-1)&groomsearchkey=@ViewData["groomsearchkey"]">Prev</a>
+        @ViewData["pagesummary"]
+        <a href="/GroomService/List?pagenum=@((int)ViewData["pagenum"]+1)&groomsearchkey=@ViewData["groomsearchkey"]">Next</a>
+    }
+</div>
+<form action="/GroomService/List" method="GET">
+    <input type="text" name="servicesearchkey" id="servicesearchkey" />
+    <input type="submit" value="Search" />
+</form>
 <div class="tilecontainer">
     @foreach (var service in @Model)
     {

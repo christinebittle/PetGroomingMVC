@@ -8,6 +8,13 @@
 <div class="navbar">
     <a class="navlink" href="/Pet/New">Add New</a>
 </div>
+<div class="paginate">
+    @{
+        <a href="/Pet/List?pagenum=@((int)ViewData["pagenum"]-1)&petsearchkey=@ViewData["petsearchkey"]">Prev</a> 
+        @ViewData["pagesummary"]
+        <a href="/Pet/List?pagenum=@((int)ViewData["pagenum"]+1)&petsearchkey=@ViewData["petsearchkey"]">Next</a>
+    }
+</div>
 <form action="/Pet/List" method="GET">
     <input type="text" name="petsearchkey" id="petsearchkey" />
     <input type="submit" value="Search" />
