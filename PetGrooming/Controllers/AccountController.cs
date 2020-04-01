@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using PetGrooming.Models;
+using PetGrooming.Models.ViewModels;
 using PetGrooming.Data;
 
 namespace PetGrooming.Controllers

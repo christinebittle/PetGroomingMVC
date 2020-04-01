@@ -154,6 +154,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\PetGroomingAuthentication.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -236,13 +237,17 @@
     <Compile Include="Migrations\202003242141332_one_one_identityuser.designer.cs">
       <DependentUpon>202003242141332_one_one_identityuser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202004011428408_isadmin_column_users.cs" />
+    <Compile Include="Migrations\202004011428408_isadmin_column_users.designer.cs">
+      <DependentUpon>202004011428408_isadmin_column_users.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\GroomBooking.cs" />
     <Compile Include="Models\Groomer.cs" />
     <Compile Include="Models\GroomService.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ViewModels\ManageViewModels.cs" />
     <Compile Include="Models\Owner.cs" />
     <Compile Include="Models\Pet.cs" />
     <Compile Include="Models\Species.cs" />
@@ -345,7 +350,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Pets\" />
-    <Folder Include="Wireframes_ERD\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -411,6 +415,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003242141332_one_one_identityuser.resx">
       <DependentUpon>202003242141332_one_one_identityuser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004011428408_isadmin_column_users.resx">
+      <DependentUpon>202004011428408_isadmin_column_users.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

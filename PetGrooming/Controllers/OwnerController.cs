@@ -51,12 +51,12 @@ namespace PetGrooming.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult> Add(string Username, string Useremail, string Userpass, string OwnerFname, string OwnerLname, string OwnerAddress, string OwnerWorkPhone, string OwnerHomePhone)
+        public async Task<ActionResult> Add(string Useremail, string Userpass, string OwnerFname, string OwnerLname, string OwnerAddress, string OwnerWorkPhone, string OwnerHomePhone)
         {
             //before creating an owner, we would like to create a user.
             //this user will be linked with an owner.
             ApplicationUser NewUser = new ApplicationUser();
-            NewUser.UserName = Username;
+            NewUser.UserName = Useremail;
             NewUser.Email = Useremail;
             //code interpreted from AccountController.cs Register Method
             IdentityResult result = await UserManager.CreateAsync(NewUser, Userpass);

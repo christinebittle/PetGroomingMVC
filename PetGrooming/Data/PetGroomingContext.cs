@@ -33,7 +33,15 @@ namespace PetGrooming.Data
         //A logged in user could be an Owner
         public virtual Owner Owner { get; set; }
 
+
         //A logged in user could be an Admin
+        //note: this could be a separate admin entity
+        //a separate admin entity would be suitable if there was
+        //more information about an admin we would need to store
+        //or relationships to admins that we would need to represent
+        //that's not the case here, so this column is fine
+        public bool IsAdmin { get; set; }
+
     }
 
     //PetGroomingContext class has been adjusted to become a subclass of IdentityDbContext instead of DbContext

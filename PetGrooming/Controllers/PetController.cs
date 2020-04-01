@@ -13,6 +13,10 @@ using PetGrooming.Models;
 using PetGrooming.Models.ViewModels;
 using System.Diagnostics;
 using System.IO;
+//needed for other sign in feature classes
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
 
 namespace PetGrooming.Controllers
 {
@@ -42,7 +46,15 @@ namespace PetGrooming.Controllers
         - https://www.entityframeworktutorial.net/EntityFramework4.3/raw-sql-query-in-entity-framework.aspx
  
          */
+        //need this to work with the login functionalities
+        //usermanager also contains custom authentication code
+        private ApplicationSignInManager _signInManager;
+        private ApplicationUserManager _userManager;
+        //reference how the Account Controller instantiates the controller class with SignInManager and UserManager
+
+
         private PetGroomingContext db = new PetGroomingContext();
+        public PetController(){ }
 
         // GET: Pet
         public ActionResult List(string petsearchkey)
@@ -56,7 +68,7 @@ namespace PetGrooming.Controllers
             {
                 //modify the query to include the search key
                 query = query + " where petname like '%"+petsearchkey+"%'";
-                Debug.WriteLine("The query is "+ query);
+                //Debug.WriteLine("The query is "+ query);
             }
 
             List<Pet> pets = db.Pets.SqlQuery(query).ToList();
@@ -77,6 +89,9 @@ namespace PetGrooming.Controllers
             {
                 return HttpNotFound();
             }
+
+            //check to see if this pet is owned by the logged in user
+            Debug.WriteLine("User Owns pet? "+UserManager.IsUserPetOwner(Pet));
 
             //need information about the list of owners associated with that pet
             string query = "select * from owners inner join PetOwners on Owners.OwnerID = PetOwners.Owner_OwnerID where Pet_PetID = @id";
@@ -256,6 +271,39 @@ namespace PetGrooming.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        /////////////
+        //how to get the UserManager and SignInManager from the server
+        /////////////
+        public PetController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        {
+            UserManager = userManager;
+            SignInManager = signInManager;
+        }
+
+        public ApplicationSignInManager SignInManager
+        {
+            get
+            {
+                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+            }
+            private set
+            {
+                _signInManager = value;
+            }
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
         }
     }
 }

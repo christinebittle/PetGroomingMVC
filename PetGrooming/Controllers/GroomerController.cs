@@ -43,7 +43,7 @@ namespace PetGrooming.Controllers
 
         public ActionResult List(string groomersearchkey)
         {
-            
+            Debug.WriteLine(UserManager.IsUserOwner());
 
             Debug.WriteLine("The search key is "+groomersearchkey);
 
@@ -75,12 +75,12 @@ namespace PetGrooming.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Add(string Username, string Useremail, string Userpass, string GroomerFName, string GroomerLName, string GroomerDOB, decimal GroomerRate)
+        public async Task<ActionResult> Add(string Useremail, string Userpass, string GroomerFName, string GroomerLName, string GroomerDOB, decimal GroomerRate)
         {
             //before creating a groomer, we would like to create a user.
             //this user will be linked with an owner.
             ApplicationUser NewUser = new ApplicationUser();
-            NewUser.UserName = Username;
+            NewUser.UserName = Useremail;
             NewUser.Email = Useremail;
             //code interpreted from AccountController.cs Register Method
             IdentityResult result = await UserManager.CreateAsync(NewUser, Userpass);
@@ -198,8 +198,9 @@ namespace PetGrooming.Controllers
 
             return RedirectToAction("List");
         }
-
+        /////////////
         //how to get the UserManager and SignInManager from the server
+        /////////////
         public GroomerController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;

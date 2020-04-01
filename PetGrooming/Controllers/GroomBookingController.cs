@@ -12,15 +12,22 @@ using PetGrooming.Data;
 using PetGrooming.Models;
 using PetGrooming.Models.ViewModels;
 using System.Diagnostics;
-
+//needed for other sign in feature classes
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
 using System.Globalization; //for cultureinfo.invariantculture
 
 namespace PetGrooming.Views
 {
     public class GroomBookingController : Controller
     {
-        private PetGroomingContext db = new PetGroomingContext();
 
+        private ApplicationSignInManager _signInManager;
+        private ApplicationUserManager _userManager;
+
+        private PetGroomingContext db = new PetGroomingContext();
+        public GroomBookingController() { }
 
         // GET: GroomBooking
         public ActionResult Index()
@@ -191,8 +198,41 @@ namespace PetGrooming.Views
         public ActionResult Show(int id)
         {
             GroomBooking booking = db.GroomBookings.Include(b=>b.GroomServices).FirstOrDefault(b=>b.GroomBookingID==id);
-
+            Debug.WriteLine("Logged in user is billed owner " + UserManager.IsUserBilledOwner(booking));
             return View(booking);
+        }
+
+        /////////////
+        //how to get the UserManager and SignInManager from the server
+        /////////////
+        public GroomBookingController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        {
+            UserManager = userManager;
+            SignInManager = signInManager;
+        }
+
+        public ApplicationSignInManager SignInManager
+        {
+            get
+            {
+                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+            }
+            private set
+            {
+                _signInManager = value;
+            }
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
         }
 
     }
