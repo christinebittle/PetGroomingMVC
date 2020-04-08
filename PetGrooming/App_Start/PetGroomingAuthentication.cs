@@ -56,7 +56,7 @@ namespace PetGrooming
             if (userid == "") return null;
             return(manager.FindById(userid));
         }
-
+        //---- this point down the code has to be yours
         public bool IsUserAdmin()
         {
             ApplicationUser user = GetUser();

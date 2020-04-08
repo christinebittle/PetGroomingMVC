@@ -30,8 +30,8 @@ namespace PetGrooming.Controllers
 
             //start of pagination algorithm (LINQ techniques)
             int perpage = 3;
-            int petcount = groomservices.Count();
-            int maxpage = (int)Math.Ceiling((decimal)petcount / perpage) - 1;
+            int servicecount = groomservices.Count();
+            int maxpage = (int)Math.Ceiling((decimal)servicecount / perpage) - 1;
             if (maxpage < 0) maxpage = 0;
             if (pagenum < 0) pagenum = 0;
             if (pagenum > maxpage) pagenum = maxpage;

@@ -54,8 +54,17 @@ namespace PetGrooming.Data
         // automatically whenever you change your model schema, please use data migrations.
         // For more information refer to the documentation:
         // http://msdn.microsoft.com/en-us/data/jj591621.aspx
-    
+
+        /*
+         * LOCAL CONNECTION STRING
         public PetGroomingContext() : base("name=PetGroomingContext")
+        {
+        }
+        */
+        //AWS Connection String
+        //see "AWSconnector.cs"
+        //we don't need to instantiate AWSconnector, it's a static method (can be accessed just from class definition)
+        public PetGroomingContext() : base(AWSconnector.GetRDSConnectionString())
         {
         }
         public static PetGroomingContext Create()

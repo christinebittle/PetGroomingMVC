@@ -128,6 +128,11 @@ namespace PetGrooming.Controllers
 
             //check to see if this pet is owned by the logged in user
             Debug.WriteLine("User Owns pet? "+UserManager.IsUserPetOwner(Pet));
+            //the user does not own a pet
+            if (!UserManager.IsUserPetOwner(Pet))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
 
             //need information about the list of owners associated with that pet
             string query = "select * from owners inner join PetOwners on Owners.OwnerID = PetOwners.Owner_OwnerID where Pet_PetID = @id";

@@ -165,6 +165,7 @@
     <Compile Include="Controllers\OwnerController.cs" />
     <Compile Include="Controllers\PetController.cs" />
     <Compile Include="Controllers\SpeciesController.cs" />
+    <Compile Include="Data\AWSconnector.cs" />
     <Compile Include="Data\PetGroomingContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
